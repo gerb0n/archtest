@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CqrsLite" Version="1.33.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ArchTest.Core\ArchTest.Core.csproj" />
+    <ProjectReference Include="..\ArchTest.EF\ArchTest.EF.csproj" />
+    <ProjectReference Include="..\ArchTest.Entity\ArchTest.Entity.csproj" />
+  </ItemGroup>
+
+</Project>
