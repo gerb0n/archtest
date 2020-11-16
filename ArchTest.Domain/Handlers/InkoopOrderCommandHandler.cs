@@ -33,6 +33,9 @@ namespace ArchTest.Domain.Handlers
             _verlaadBeurtService = verlaadBeurtService;
         }
 
+        /// <summary>
+        /// Lijkt me wel prima en to-the-point
+        /// </summary>
         public async Task Handle(CreateInkoopOrder message)
         {
             var inkoopOrder = new InkoopOrder();
@@ -46,15 +49,15 @@ namespace ArchTest.Domain.Handlers
             await _dbContext.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// Bij iedere command de inkooporder ophalen en de juiste includes bepalen. In dit geval 'laadplaatsen' includen omdat laadplaats al child toegevoegd moet worden
+        /// </summary>
         public async Task Handle(AddLaadPlaats message)
         {
-            // Bij iedere command de inkooporder ophalen en de juiste includes bepalen. 
             var inkoopOrder = await GetInkoopOrderById(
                 message.InkoopOrderId,
                 o => o.LaadPlaatsen);
 
-            // Moet het creeeren van zo'n plaats gebeuren binnen een InkoopOrderPlaatsHandler?
-            // Ik kan me herinneren dat de CustomerAggregate zo'n mega grote draak was bij anycoin omdat het ook als doorgeefluik fungeerde
             var plaats = new InkoopOrderPlaats();
             plaats.Create(
                 message.PlaatsId,
@@ -69,6 +72,7 @@ namespace ArchTest.Domain.Handlers
         /// <summary>
         /// In InkoopOrderCommandHandler of een nieuwe handler voor InkoopOrderPlaats?
         /// Moet dan voor ieder complex-type-property binnen InkoopOrder een handler komen?
+        /// Ik kan me herinneren dat de CustomerAggregate zo'n mega grote draak was bij anycoin omdat het ook als doorgeefluik fungeerde
         /// </summary>
         public async Task Handle(VerlaadBeurtAanvragen message, CancellationToken token = default)
         {
@@ -84,7 +88,7 @@ namespace ArchTest.Domain.Handlers
 
             await _dbContext.SaveChangesAsync();
 
-            // Juiste plek om zo'n domain service aan te roepen?
+            // Juiste plek om zo'n domain service aan te roepen die non-domain-dingen uitvoert?
             await _verlaadBeurtService.VerlaadBeurtAanvraagMailSturen(inkoopOrderPlaats);
         }
 

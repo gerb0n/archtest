@@ -20,7 +20,7 @@ namespace ArchTest.Domain.Services
             // bij vestiging kijken of property X actief is
             // zoja mail sturen, zo nee niet
 
-            //  hoe unittest je welke flow het invalt
+            //  Hoe unittest je dat een command resulteert in een verstuurde mail als je zonder events werkt?
             return Task.CompletedTask;
         }
     }

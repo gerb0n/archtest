@@ -35,7 +35,7 @@ namespace ArchTest.Api
             services
                 .AddSwaggerGen(c =>
                 {
-                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "EF patch-merge API", Version = "v1" });
+                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "ArchTest API", Version = "v1" });
                     c.CustomOperationIds(e => $"{e.ActionDescriptor.RouteValues["controller"]}_{e.HttpMethod}");
                 })
                 .AddSwaggerGenNewtonsoftSupport();
@@ -55,7 +55,7 @@ namespace ArchTest.Api
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "EF patch-merge API");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "ArchTest API");
             });
 
 
