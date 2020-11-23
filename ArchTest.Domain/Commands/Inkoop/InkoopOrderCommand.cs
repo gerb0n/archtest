@@ -1,8 +1,9 @@
-﻿using System;
+﻿using CQRSlite.Commands;
+using System;
 
-namespace ArchTest.Domain.Commands
+namespace ArchTest.Domain.Commands.Inkoop
 {
-    public class InkoopOrderCommand
+    public class InkoopOrderCommand : ICommand
     {
         public InkoopOrderCommand(Guid inkoopOrderId)
         {

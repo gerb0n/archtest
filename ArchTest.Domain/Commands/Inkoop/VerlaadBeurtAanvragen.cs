@@ -1,9 +1,8 @@
-﻿using CQRSlite.Commands;
-using System;
+﻿using System;
 
-namespace ArchTest.Domain.Commands
+namespace ArchTest.Domain.Commands.Inkoop
 {
-    public class VerlaadBeurtAanvragen : InkoopOrderCommand, ICommand
+    public class VerlaadBeurtAanvragen : InkoopOrderCommand
     {
         public VerlaadBeurtAanvragen(Guid inkoopOrderId, Guid inkoopOrderPlaatsId, Guid? schipId, DateTime datum, string bijzonderheden)
             : base(inkoopOrderId)

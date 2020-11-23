@@ -1,4 +1,4 @@
-﻿using ArchTest.Domain.Commands;
+﻿using ArchTest.Domain.Commands.Inkoop;
 using ArchTest.EF;
 using CQRSlite.Commands;
 using Microsoft.AspNetCore.Mvc;

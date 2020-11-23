@@ -1,7 +1,7 @@
 ﻿using CQRSlite.Commands;
 using System;
 
-namespace ArchTest.Domain.Commands
+namespace ArchTest.Domain.Commands.Inkoop
 {
     public class CreateInkoopOrder : ICommand
     {
