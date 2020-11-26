@@ -7,7 +7,7 @@ Hoe we business-rules correct kunnen opzetten is nog even een vraagstuk.
         - Een 'RuleContext' meegeven aan de rule, en deze context vullen de commandhandler voelt ook lelijk. RuleContext gaat een verzamelbak worden voor allerlei rules
 
 Kunnen we iets met readmodels voor elkaar krijgen?
-We willen het writemodel het liefst niet meer gebruiken om te querieën. Wat is een goede (midden)weg om readmodels te introduceren?
+We willen het writemodel het liefst niet meer gebruiken om te querieÃ«n. Wat is een goede (midden)weg om readmodels te introduceren?
 
 In de huidige versie heb ik al wel readmodels/events geintroduceerd (op de manier zoals CQRS Lite het heeft gedaan in sample-project).
 Het werkt alleen nog niet, de handlers van readmodels worden niet getriggered/aangeroepen omdat ik her en der wat shortcurts heb genomen met CQRSLite.
