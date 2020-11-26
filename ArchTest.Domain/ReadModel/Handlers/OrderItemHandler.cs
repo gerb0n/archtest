@@ -23,6 +23,7 @@ namespace ArchTest.Domain.ReadModel.Handlers
         public async Task Handle(InkoopOrderCreated message)
         {
             var orderItem = new OrderItem();
+            orderItem.Id = message.InkoopOrderId;
             _dbContext.OrderItems.Add(orderItem);
             await _dbContext.SaveChangesAsync();
         }

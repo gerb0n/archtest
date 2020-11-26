@@ -1,4 +1,5 @@
 ﻿using ArchTest.Domain.ReadModel.Events;
+using CQRSlite.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ namespace ArchTest.Domain.WriteModel.Entities
     public partial class InkoopOrder
     {
         public void Create(
+            IEventPublisher publisher,
             Guid opdrachtgeverId,
             Guid bevrachterId,
             Guid ladingId,
@@ -19,7 +21,9 @@ namespace ArchTest.Domain.WriteModel.Entities
             LadingId = ladingId;
             Hoeveelheid = hoeveelheid;
 
-            ApplyEvent(new InkoopOrderCreated(Id, OpdrachtgeverId, BevrachterId, LadingId, Hoeveelheid));
+            var @event = new InkoopOrderCreated(Id, OpdrachtgeverId, BevrachterId, LadingId, Hoeveelheid);
+            ApplyEvent(@event);
+            publisher.Publish(@event);
         }
 
         public void AddLaadPlaats(Guid plaatsId, Guid vestigingId, Guid? overslagBedrijfId)

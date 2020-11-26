@@ -18,7 +18,7 @@ namespace ArchTest.Domain.Rules.Inkoop
 
             if (context.InkoopOrderPlaats?.VerlaadBeurt != null)
             {
-                throw new InvalidOperationException($"VerlaadBeurt al aangevraagd voor inkooporderplaats <id-here>");
+                throw new InvalidOperationException($"VerlaadBeurt al aangevraagd voor inkooporderplaats {context.InkoopOrderPlaats.Id}");
             }
         }
 

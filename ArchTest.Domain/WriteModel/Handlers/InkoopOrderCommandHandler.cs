@@ -4,6 +4,7 @@ using ArchTest.Domain.Services.Interfaces;
 using ArchTest.Domain.WriteModel.Entities;
 using CQRSlite.Commands;
 using CQRSlite.Domain;
+using CQRSlite.Events;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -23,23 +24,27 @@ namespace ArchTest.Domain.Handlers
         private readonly ISession _session;
         private readonly IEnumerable<IRule> _rules;
         private readonly IVerlaadBeurtService _verlaadBeurtService;
+        private readonly IEventPublisher _publisher;
 
         public InkoopOrderCommandHandler(
             ArchTestContext dbContext,
             ISession session,
             IEnumerable<IRule> rules,
-            IVerlaadBeurtService verlaadBeurtService)
+            IVerlaadBeurtService verlaadBeurtService,
+            IEventPublisher publisher)
         {
             _dbContext = dbContext;
             _session = session;
             _rules = rules;
             _verlaadBeurtService = verlaadBeurtService;
+            _publisher = publisher;
         }
 
         public async Task Handle(CreateInkoopOrder message)
         {
             var inkoopOrder = new InkoopOrder();
             inkoopOrder.Create(
+                _publisher,
                 message.OpdrachtgeverId,
                 message.BevrachterId,
                 message.LadingId,
@@ -47,6 +52,7 @@ namespace ArchTest.Domain.Handlers
 
             await _dbContext.InkoopOrders.AddAsync(inkoopOrder);
             await _dbContext.SaveChangesAsync();
+
             await _session.Commit();
         }
 
