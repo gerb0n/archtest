@@ -27,11 +27,13 @@ namespace ArchTest.Domain.Tests.Builders
         }
 
         public InkoopOrderBuilder WithPlaats(
+            Guid? inkoopOrderPlaatsId = null,
             Guid? plaatsId = null,
             Guid? vestigingId = null,
             Guid? overslagbedrijfId = null)
         {
             _inkoopOrder.AddLaadPlaats(
+                inkoopOrderPlaatsId ?? Guid.NewGuid(),
                 plaatsId ?? Guid.NewGuid(),
                 vestigingId ?? Guid.NewGuid(),
                 overslagbedrijfId ?? Guid.NewGuid());

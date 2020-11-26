@@ -34,6 +34,7 @@ namespace ArchTest.Domain.Tests
         {
             // Arrange
             var builder = new InkoopOrderBuilder();
+            Guid inkoopOrderPlaatsId = Guid.NewGuid();
             Guid plaatsId = Guid.NewGuid();
             Guid vestigingId = Guid.NewGuid();
             Guid overslagbedrijfId = Guid.NewGuid();
@@ -43,12 +44,13 @@ namespace ArchTest.Domain.Tests
                 .Build();
 
             // Act
-            inkoopOrder.AddLaadPlaats(plaatsId, vestigingId, overslagbedrijfId);
+            inkoopOrder.AddLaadPlaats(inkoopOrderPlaatsId, plaatsId, vestigingId, overslagbedrijfId);
 
             inkoopOrder.LaadPlaatsen.Should().NotBeEmpty();
             inkoopOrder.LaadPlaatsen.Count.Should().Be(1);
 
             var laadplaats = inkoopOrder.LaadPlaatsen[0];
+            laadplaats.Id.Should().Be(inkoopOrderPlaatsId);
             laadplaats.PlaatsId.Should().Be(plaatsId);
             laadplaats.VestigingId.Should().Be(vestigingId);
             laadplaats.OverslagbedrijfId.Should().Be(overslagbedrijfId);
@@ -59,17 +61,18 @@ namespace ArchTest.Domain.Tests
         {
             // Arrange
             var builder = new InkoopOrderBuilder();
+            Guid inkoopOrderPlaatsId = Guid.NewGuid();
             Guid plaatsId = Guid.NewGuid();
             Guid vestigingId = Guid.NewGuid();
             Guid overslagbedrijfId = Guid.NewGuid();
 
             var inkoopOrder = builder
                 .Default()
-                .WithPlaats(plaatsId, vestigingId, overslagbedrijfId)
+                .WithPlaats(inkoopOrderPlaatsId, plaatsId, vestigingId, overslagbedrijfId)
                 .Build();
 
             // Act
-            Action act = () => inkoopOrder.AddLaadPlaats(plaatsId, vestigingId, overslagbedrijfId);
+            Action act = () => inkoopOrder.AddLaadPlaats(inkoopOrderPlaatsId, plaatsId, vestigingId, overslagbedrijfId);
 
             act.Should().Throw<ArgumentException>();
         }
