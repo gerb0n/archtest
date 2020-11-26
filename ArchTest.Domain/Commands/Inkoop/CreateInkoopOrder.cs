@@ -1,4 +1,5 @@
-﻿using CQRSlite.Commands;
+﻿using ArchTest.Core.Attributes;
+using CQRSlite.Commands;
 using System;
 
 namespace ArchTest.Domain.Commands.Inkoop
@@ -17,9 +18,15 @@ namespace ArchTest.Domain.Commands.Inkoop
             Hoeveelheid = hoeveelheid;
         }
 
+        [NotNullOrDefault()]
         public Guid OpdrachtgeverId { get; }
+
+        [NotNullOrDefault]
         public Guid BevrachterId { get; }
+
+        [NotNullOrDefault]
         public Guid LadingId { get; }
+
         public int? Hoeveelheid { get; }
     }
 }

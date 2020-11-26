@@ -67,7 +67,7 @@ namespace ArchTest.Domain.Handlers
         {
             var inkoopOrder = await GetInkoopOrderById(
                 message.InkoopOrderId,
-                o => o.LaadPlaatsen);
+                o => o.LaadPlaatsen.Select(lp => lp.VerlaadBeurt));
 
             var inkoopOrderPlaats = GetInkoopOrderPlaatsById(inkoopOrder, message.InkoopOrderPlaatsId);
 
@@ -113,7 +113,7 @@ namespace ArchTest.Domain.Handlers
             var rules = _rules.Where(rule => rule.ShouldBeExecuted(command));
             foreach (var rule in rules)
             {
-                rule.Execute();
+                //rule.Execute();
             }
         }
     }

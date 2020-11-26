@@ -1,4 +1,5 @@
-﻿using ArchTest.Domain.Commands.Inkoop;
+﻿using ArchTest.Core.Extensions.CqrsLite;
+using ArchTest.Domain.Commands.Inkoop;
 using ArchTest.EF;
 using CQRSlite.Commands;
 using Microsoft.AspNetCore.Mvc;
@@ -33,7 +34,7 @@ namespace ArchTest.Api.Controllers
                 Guid.NewGuid(),
                 1500);
 
-            await _commandSender.Send(command);
+            await _commandSender.ValidateAndSend(command);
 
             return Ok();
         }

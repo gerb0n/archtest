@@ -1,5 +1,4 @@
-﻿using ArchTest.Core.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,10 +12,6 @@ namespace ArchTest.Entity
             Guid ladingId,
             int? hoeveelheid)
         {
-            AssertionHelper.AssertFieldIsNotNullOrDefault(opdrachtgeverId, nameof(opdrachtgeverId));
-            AssertionHelper.AssertFieldIsNotNullOrDefault(bevrachterId, nameof(bevrachterId));
-            AssertionHelper.AssertFieldIsNotNullOrDefault(ladingId, nameof(ladingId));
-
             OpdrachtgeverId = opdrachtgeverId;
             BevrachterId = bevrachterId;
             LadingId = ladingId;

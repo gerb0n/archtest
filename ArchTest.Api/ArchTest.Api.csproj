@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ArchTest.Core\ArchTest.Core.csproj" />
     <ProjectReference Include="..\ArchTest.Domain\ArchTest.Domain.csproj" />
     <ProjectReference Include="..\ArchTest.EF\ArchTest.EF.csproj" />
   </ItemGroup>

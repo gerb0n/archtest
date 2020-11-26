@@ -22,12 +22,6 @@ namespace ArchTest.Entity
         {
             AssertionHelper.AssertFieldIsNotNullOrDefault(datum, nameof(datum));
 
-            // Hier? Of in Rule?
-            if (VerlaadBeurt != null)
-            {
-                throw new InvalidOperationException($"VerlaadBeurt al aangevraagd voor inkooporderplaats {Id}");
-            }
-
             VerlaadBeurt = new VerlaadBeurt
             {
                 SchipId = schipId,
