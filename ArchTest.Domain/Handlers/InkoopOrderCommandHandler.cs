@@ -1,9 +1,9 @@
 ﻿using ArchTest.Domain.Commands.Inkoop;
 using ArchTest.Domain.Rules;
 using ArchTest.Domain.Services.Interfaces;
-using ArchTest.EF;
-using ArchTest.Entity;
+using ArchTest.Domain.WriteModel.Entities;
 using CQRSlite.Commands;
+using CQRSlite.Domain;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -20,15 +20,18 @@ namespace ArchTest.Domain.Handlers
         ICancellableCommandHandler<VerlaadBeurtAanvragen>
     {
         private readonly ArchTestContext _dbContext;
+        private readonly ISession _session;
         private readonly IEnumerable<IRule> _rules;
         private readonly IVerlaadBeurtService _verlaadBeurtService;
 
         public InkoopOrderCommandHandler(
             ArchTestContext dbContext,
+            ISession session,
             IEnumerable<IRule> rules,
             IVerlaadBeurtService verlaadBeurtService)
         {
             _dbContext = dbContext;
+            _session = session;
             _rules = rules;
             _verlaadBeurtService = verlaadBeurtService;
         }
@@ -44,6 +47,7 @@ namespace ArchTest.Domain.Handlers
 
             await _dbContext.InkoopOrders.AddAsync(inkoopOrder);
             await _dbContext.SaveChangesAsync();
+            await _session.Commit();
         }
 
         public async Task Handle(AddLaadPlaats message)
@@ -52,13 +56,10 @@ namespace ArchTest.Domain.Handlers
                 message.InkoopOrderId,
                 o => o.LaadPlaatsen);
 
-            var plaats = new InkoopOrderPlaats();
-            plaats.Create(
+            inkoopOrder.AddLaadPlaats(
                 message.PlaatsId,
                 message.VestigingId,
-                message.OverslagId);
-
-            inkoopOrder.AddLaadPlaats(plaats);
+                message.OverslagBedrijfId);
 
             await _dbContext.SaveChangesAsync();
         }

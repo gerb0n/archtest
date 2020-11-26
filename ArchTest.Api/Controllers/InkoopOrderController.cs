@@ -1,6 +1,6 @@
 ﻿using ArchTest.Core.Extensions.CqrsLite;
+using ArchTest.Domain;
 using ArchTest.Domain.Commands.Inkoop;
-using ArchTest.EF;
 using CQRSlite.Commands;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -71,6 +71,15 @@ namespace ArchTest.Api.Controllers
         {
             var orders = await _dbContext.InkoopOrders
                 .Include(o => o.LaadPlaatsen).ThenInclude(p => p.VerlaadBeurt)
+                .ToListAsync();
+            return Ok(orders);
+        }
+
+        [HttpGet("read")]
+        public async Task<IActionResult> GetRead()
+        {
+            var orders = await _dbContext.OrderItems
+                .Include(o => o.LaadPlaatsen)
                 .ToListAsync();
             return Ok(orders);
         }

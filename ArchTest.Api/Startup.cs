@@ -1,7 +1,7 @@
 using ArchTest.Api.Extensions;
+using ArchTest.Domain;
 using ArchTest.Domain.Services;
 using ArchTest.Domain.Services.Interfaces;
-using ArchTest.EF;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;

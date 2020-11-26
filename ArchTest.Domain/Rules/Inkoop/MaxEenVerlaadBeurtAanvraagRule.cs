@@ -1,5 +1,5 @@
 ﻿using ArchTest.Domain.Commands.Inkoop;
-using ArchTest.Entity;
+using ArchTest.Domain.WriteModel.Entities;
 using CQRSlite.Commands;
 using System;
 using System.Linq;

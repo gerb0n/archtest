@@ -1,21 +1,24 @@
 ﻿using System;
 
-namespace ArchTest.Domain.Commands.Inkoop
+namespace ArchTest.Domain.ReadModel.Events
 {
-    public class AddLaadPlaats : InkoopOrderCommand
+    public class LaadPlaatsAdded : InkoopOrderEvent
     {
-        public AddLaadPlaats(
+        public LaadPlaatsAdded(
             Guid inkoopOrderId,
+            Guid inkoopOrderPlaatsId,
             Guid plaatsId,
             Guid vestigingId,
             Guid? overslagBedrijfId)
             : base(inkoopOrderId)
         {
+            InkoopOrderPlaatsId = inkoopOrderPlaatsId;
             PlaatsId = plaatsId;
             VestigingId = vestigingId;
             OverslagBedrijfId = overslagBedrijfId;
         }
 
+        public Guid InkoopOrderPlaatsId { get; }
         public Guid PlaatsId { get; }
         public Guid VestigingId { get; }
         public Guid? OverslagBedrijfId { get; }

@@ -1,9 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using ArchTest.Domain.WriteModel.Entities;
+using System.Threading.Tasks;
 
 namespace ArchTest.Domain.Services.Interfaces
 {
     public interface IVerlaadBeurtService
     {
-        Task VerlaadBeurtAanvraagMailSturen(Entity.InkoopOrderPlaats inkoopOrderPlaats);
+        Task VerlaadBeurtAanvraagMailSturen(InkoopOrderPlaats inkoopOrderPlaats);
     }
 }

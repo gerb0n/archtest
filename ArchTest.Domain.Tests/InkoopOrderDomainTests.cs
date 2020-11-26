@@ -1,5 +1,5 @@
 using ArchTest.Domain.Tests.Builders;
-using ArchTest.Entity;
+using ArchTest.Domain.WriteModel.Entities;
 using FluentAssertions;
 using System;
 using System.Linq;
@@ -38,19 +38,12 @@ namespace ArchTest.Domain.Tests
             Guid vestigingId = Guid.NewGuid();
             Guid overslagbedrijfId = Guid.NewGuid();
 
-            var plaats = new InkoopOrderPlaats
-            {
-                PlaatsId = plaatsId,
-                VestigingId = vestigingId,
-                OverslagbedrijfId = overslagbedrijfId
-            };
-
             var inkoopOrder = builder
                 .Default()
                 .Build();
 
             // Act
-            inkoopOrder.AddLaadPlaats(plaats);
+            inkoopOrder.AddLaadPlaats(plaatsId, vestigingId, overslagbedrijfId);
 
             inkoopOrder.LaadPlaatsen.Should().NotBeEmpty();
             inkoopOrder.LaadPlaatsen.Count.Should().Be(1);
@@ -70,20 +63,13 @@ namespace ArchTest.Domain.Tests
             Guid vestigingId = Guid.NewGuid();
             Guid overslagbedrijfId = Guid.NewGuid();
 
-            var plaats = new InkoopOrderPlaats
-            {
-                PlaatsId = plaatsId,
-                VestigingId = vestigingId,
-                OverslagbedrijfId = overslagbedrijfId
-            };
-
             var inkoopOrder = builder
                 .Default()
-                .WithPlaats(plaats)
+                .WithPlaats(plaatsId, vestigingId, overslagbedrijfId)
                 .Build();
 
             // Act
-            Action act = () => inkoopOrder.AddLaadPlaats(plaats);
+            Action act = () => inkoopOrder.AddLaadPlaats(plaatsId, vestigingId, overslagbedrijfId);
 
             act.Should().Throw<ArgumentException>();
         }

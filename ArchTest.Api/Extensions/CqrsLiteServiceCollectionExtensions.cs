@@ -1,6 +1,10 @@
-﻿using ArchTest.Domain.Handlers;
+﻿using ArchTest.Domain.EventStore;
+using ArchTest.Domain.Handlers;
 using ArchTest.Domain.Rules;
+using CQRSlite.Caching;
 using CQRSlite.Commands;
+using CQRSlite.Domain;
+using CQRSlite.Events;
 using CQRSlite.Messages;
 using CQRSlite.Queries;
 using CQRSlite.Routing;
@@ -16,7 +20,14 @@ namespace ArchTest.Api.Extensions
         {
             services.AddSingleton<Router>(new Router());
             services.AddSingleton<ICommandSender>(y => y.GetService<Router>());
+            services.AddSingleton<IEventPublisher>(y => y.GetService<Router>());
             services.AddSingleton<IHandlerRegistrar>(y => y.GetService<Router>());
+            services.AddSingleton<IQueryProcessor>(y => y.GetService<Router>());
+            services.AddSingleton<IEventStore, InMemoryEventStore>();
+            services.AddSingleton<ICache, MemoryCache>();
+            services.AddScoped<IRepository>(y => new CacheRepository(new Repository(y.GetService<IEventStore>()), y.GetService<IEventStore>(), y.GetService<ICache>()));
+            services.AddScoped<ISession, Session>();
+
 
             services.Scan(scan => scan
                 .FromAssemblies(typeof(InkoopOrderCommandHandler).GetTypeInfo().Assembly)

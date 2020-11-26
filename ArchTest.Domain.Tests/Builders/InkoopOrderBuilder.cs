@@ -1,4 +1,4 @@
-﻿using ArchTest.Entity;
+﻿using ArchTest.Domain.WriteModel.Entities;
 using System;
 
 namespace ArchTest.Domain.Tests.Builders
@@ -26,11 +26,16 @@ namespace ArchTest.Domain.Tests.Builders
             return this;
         }
 
-        public InkoopOrderBuilder WithPlaats(InkoopOrderPlaats plaats = null)
+        public InkoopOrderBuilder WithPlaats(
+            Guid? plaatsId = null,
+            Guid? vestigingId = null,
+            Guid? overslagbedrijfId = null)
         {
-            plaats = plaats ?? new InkoopOrderPlaats();
+            _inkoopOrder.AddLaadPlaats(
+                plaatsId ?? Guid.NewGuid(),
+                vestigingId ?? Guid.NewGuid(),
+                overslagbedrijfId ?? Guid.NewGuid());
 
-            _inkoopOrder.AddLaadPlaats(plaats);
             return this;
         }
 

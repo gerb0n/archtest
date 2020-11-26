@@ -1,6 +1,5 @@
 ﻿using ArchTest.Domain.Services.Interfaces;
-using ArchTest.EF;
-using ArchTest.Entity;
+using ArchTest.Domain.WriteModel.Entities;
 using System.Threading.Tasks;
 
 namespace ArchTest.Domain.Services
